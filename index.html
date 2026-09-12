@@ -1,0 +1,1914 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Happy 23rd, Sayangkuu ♥</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,500;1,400;1,500&family=Outfit:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.4/dist/confetti.browser.js"></script>
+
+    <style>
+      :root {
+        --bg: #16030d;
+        --wine: #4d1430;
+        --wine-dark: #2b0819;
+        --pink: #e8b4b8;
+        --gold: #f6c177;
+        --cream: #f8eadc;
+        --text: #f8eadc;
+        --muted: #cdb7aa;
+        --paper: #fff8ed;
+        --paper-text: #4a2938;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        overflow-x: hidden;
+        color: var(--text);
+        font-family: "Outfit", sans-serif;
+        background: radial-gradient(
+            circle at 10% 10%,
+            rgba(190, 70, 112, 0.18),
+            transparent 27%
+          ),
+          radial-gradient(
+            circle at 90% 20%,
+            rgba(246, 193, 119, 0.11),
+            transparent 25%
+          ),
+          radial-gradient(
+            circle at 50% 75%,
+            rgba(112, 30, 65, 0.22),
+            transparent 34%
+          ),
+          linear-gradient(135deg, #12030a, #351024 48%, #19040e);
+        background-attachment: fixed;
+      }
+
+      body::before {
+        position: fixed;
+        inset: 0;
+        z-index: -1;
+        pointer-events: none;
+        opacity: 0.14;
+        background-image: radial-gradient(
+          rgba(255, 255, 255, 0.6) 1px,
+          transparent 1px
+        );
+        background-size: 38px 38px;
+        content: "";
+      }
+
+      button,
+      input {
+        font-family: "Outfit", sans-serif;
+      }
+
+      button {
+        cursor: pointer;
+      }
+
+      .display {
+        font-family: "Cormorant Garamond", serif;
+      }
+
+      .script {
+        font-family: "Caveat", cursive;
+      }
+
+      .grain {
+        position: fixed;
+        inset: 0;
+        z-index: 50;
+        pointer-events: none;
+        opacity: 0.04;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      }
+
+      .overline {
+        color: var(--gold);
+        font-size: 11px;
+        font-weight: 600;
+        letter-spacing: 0.25em;
+        text-transform: uppercase;
+      }
+
+      .btn {
+        padding: 15px 27px;
+        border: 1px solid rgba(255, 255, 255, 0.7);
+        border-radius: 999px;
+        background: var(--gold);
+        color: #3b0d1d;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.22);
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        transition: 0.25s ease;
+      }
+
+      .btn:hover {
+        transform: translateY(-4px);
+      }
+
+      .outline {
+        border-color: var(--gold);
+        background: transparent;
+        color: var(--gold);
+      }
+
+      .reveal {
+        opacity: 0;
+        transform: translateY(32px);
+        transition: 0.8s ease;
+      }
+
+      .reveal.show {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      /* BUNGA JATUH */
+
+      #flowers {
+        position: fixed;
+        inset: 0;
+        z-index: 60;
+        overflow: hidden;
+        pointer-events: none;
+      }
+
+      .flower {
+        position: absolute;
+        top: -12vh;
+        animation: fall linear infinite;
+      }
+
+      @keyframes fall {
+        0% {
+          opacity: 0;
+          transform: translate(0, -10vh) rotate(0deg);
+        }
+
+        10% {
+          opacity: 0.85;
+        }
+
+        100% {
+          opacity: 0;
+          transform: translate(var(--drift), 115vh) rotate(500deg);
+        }
+      }
+
+      /* PIN */
+
+      #pin-screen {
+        position: fixed;
+        inset: 0;
+        z-index: 120;
+        display: grid;
+        place-items: center;
+        padding: 22px;
+        background: radial-gradient(
+            circle at 50% 35%,
+            rgba(181, 75, 116, 0.25),
+            transparent 34%
+          ),
+          #15030c;
+        transition: 0.7s ease;
+      }
+
+      #pin-screen.hide {
+        opacity: 0;
+        pointer-events: none;
+        transform: scale(1.04);
+      }
+
+      .pin-card {
+        position: relative;
+        width: min(455px, 94vw);
+        padding: 42px 31px 30px;
+        overflow: hidden;
+        border: 1px solid rgba(246, 193, 119, 0.6);
+        border-radius: 24px;
+        background: linear-gradient(
+          145deg,
+          rgba(87, 25, 52, 0.95),
+          rgba(38, 7, 19, 0.97)
+        );
+        box-shadow: 0 28px 80px rgba(0, 0, 0, 0.55);
+        text-align: center;
+      }
+
+      .pin-card::before,
+      .pin-card::after {
+        position: absolute;
+        color: var(--gold);
+        font-size: 27px;
+        content: "✦";
+      }
+
+      .pin-card::before {
+        top: 17px;
+        left: 25px;
+      }
+
+      .pin-card::after {
+        right: 25px;
+        bottom: 18px;
+      }
+
+      .pin-icon {
+        display: grid;
+        width: 62px;
+        height: 62px;
+        margin: auto;
+        place-items: center;
+        border: 1px solid rgba(246, 193, 119, 0.65);
+        border-radius: 50%;
+        background: rgba(246, 193, 119, 0.1);
+        color: var(--gold);
+        font-family: "Cormorant Garamond", serif;
+        font-size: 42px;
+      }
+
+      .pin-card h1 {
+        margin: 14px 0;
+        font-family: "Cormorant Garamond", serif;
+        font-size: clamp(2.1rem, 7vw, 3.3rem);
+        font-style: italic;
+        font-weight: 300;
+        line-height: 1.05;
+      }
+
+      .pin-card h1 em {
+        color: var(--pink);
+      }
+
+      .pin-text {
+        max-width: 340px;
+        margin: auto;
+        color: var(--muted);
+        font-size: 14px;
+        line-height: 1.8;
+      }
+
+      .pin-label {
+        margin: 23px 0 8px;
+        color: var(--gold);
+        font-family: "Caveat", cursive;
+        font-size: 21px;
+      }
+
+      .pin-input {
+        width: 100%;
+        padding: 14px;
+        border: 1px solid rgba(246, 193, 119, 0.6);
+        border-radius: 12px;
+        outline: none;
+        background: rgba(255, 255, 255, 0.06);
+        color: var(--text);
+        font-size: 22px;
+        letter-spacing: 0.35em;
+        text-align: center;
+      }
+
+      .pin-input:focus {
+        box-shadow: 0 0 0 4px rgba(246, 193, 119, 0.13);
+      }
+
+      .pin-error {
+        height: 22px;
+        margin-top: 9px;
+        color: #ffb4c7;
+        font-size: 13px;
+      }
+
+      .pin-foot {
+        margin-top: 20px;
+        padding-top: 14px;
+        border-top: 1px dashed rgba(246, 193, 119, 0.35);
+        color: var(--muted);
+        font-family: "Caveat", cursive;
+        font-size: 18px;
+      }
+
+      /* INTRO */
+
+      #intro {
+        position: fixed;
+        inset: 0;
+        z-index: 100;
+        display: grid;
+        place-items: center;
+        padding: 24px;
+        background: rgba(22, 3, 12, 0.96);
+        backdrop-filter: blur(13px);
+        text-align: center;
+        transition: 0.7s ease;
+      }
+
+      #intro.hide {
+        opacity: 0;
+        pointer-events: none;
+        transform: scale(1.04);
+      }
+
+      .intro-heart {
+        width: 46px;
+        fill: var(--gold);
+        animation: beat 1.4s infinite;
+      }
+
+      @keyframes beat {
+        50% {
+          transform: scale(1.15);
+        }
+      }
+
+      #intro h1 {
+        margin: 17px 0;
+        font-family: "Cormorant Garamond", serif;
+        font-size: clamp(2.4rem, 7vw, 4.2rem);
+        font-style: italic;
+        font-weight: 300;
+      }
+
+      .intro-sub {
+        max-width: 390px;
+        color: var(--muted);
+        line-height: 1.8;
+      }
+
+      /* HERO */
+
+      .hero {
+        position: relative;
+        display: grid;
+        min-height: 100vh;
+        place-items: center;
+        padding: 24px;
+        overflow: hidden;
+        text-align: center;
+      }
+
+      .hero::before {
+        position: absolute;
+        top: 16%;
+        left: 9%;
+        font-size: 46px;
+        content: "🌷";
+        transform: rotate(-18deg);
+      }
+
+      .hero::after {
+        position: absolute;
+        right: 10%;
+        bottom: 16%;
+        font-size: 46px;
+        content: "🎂";
+        transform: rotate(12deg);
+      }
+
+      .hero-content {
+        max-width: 850px;
+        padding: 45px 26px;
+        border: 1px dashed rgba(255, 255, 255, 0.5);
+        border-radius: 32px;
+        background: rgba(38, 10, 24, 0.18);
+      }
+
+      .hero h1 {
+        margin-top: 15px;
+        font-family: "Cormorant Garamond", serif;
+        font-size: clamp(3rem, 10vw, 6.2rem);
+        font-weight: 300;
+        line-height: 1.02;
+      }
+
+      .line {
+        display: block;
+        overflow: hidden;
+      }
+
+      .line span {
+        display: block;
+        transform: translateY(115%);
+        transition: 1s cubic-bezier(0.22, 1, 0.36, 1);
+      }
+
+      .line:nth-child(2) span {
+        transition-delay: 0.15s;
+      }
+
+      .line:nth-child(3) span {
+        transition-delay: 0.3s;
+      }
+
+      body.started .line span {
+        transform: translateY(0);
+      }
+
+      .gold {
+        color: var(--gold);
+        font-style: italic;
+      }
+
+      .subtitle {
+        max-width: 500px;
+        margin: 27px auto 0;
+        color: var(--muted);
+        line-height: 1.9;
+        opacity: 0;
+        transition: 0.8s 0.7s;
+      }
+
+      body.started .subtitle {
+        opacity: 1;
+      }
+
+      .hero-note {
+        display: inline-block;
+        margin-top: 22px;
+        padding: 7px 15px;
+        background: #ffe5a9;
+        color: #4d2035;
+        font-family: "Caveat", cursive;
+        font-size: 22px;
+        transform: rotate(-2deg);
+      }
+
+      .scroll {
+        position: absolute;
+        bottom: 28px;
+        color: var(--muted);
+        font-size: 10px;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+      }
+
+      /* TEXT BERJALAN */
+
+      .marquee {
+        overflow: hidden;
+        padding: 26px 0;
+        border-top: 1px solid rgba(232, 180, 184, 0.22);
+        border-bottom: 1px solid rgba(232, 180, 184, 0.22);
+        white-space: nowrap;
+      }
+
+      .marquee-track {
+        display: inline-flex;
+        width: max-content;
+        animation: run 40s linear infinite;
+      }
+
+      .marquee-track span {
+        color: rgba(248, 234, 220, 0.58);
+        font-family: "Cormorant Garamond", serif;
+        font-size: clamp(1.5rem, 3vw, 2rem);
+        font-style: italic;
+      }
+
+      .marquee-track i {
+        margin: 0 2.2rem;
+        color: var(--gold);
+      }
+
+      @keyframes run {
+        to {
+          transform: translateX(-50%);
+        }
+      }
+
+      /* UMUM */
+
+      section {
+        padding: 105px 24px;
+      }
+
+      h2 {
+        margin-top: 10px;
+        font-family: "Cormorant Garamond", serif;
+        font-size: clamp(2.3rem, 6vw, 3.8rem);
+        font-weight: 300;
+      }
+
+      h2 em {
+        color: var(--pink);
+      }
+
+      .head {
+        max-width: 670px;
+        margin: auto;
+        text-align: center;
+      }
+
+      .lead {
+        margin-top: 17px;
+        color: var(--muted);
+        line-height: 1.85;
+      }
+
+      /* SURAT */
+
+      .letter {
+        max-width: 680px;
+        margin: auto;
+      }
+
+      .letter-body {
+        margin-top: 40px;
+      }
+
+      .letter-body p {
+        margin-bottom: 25px;
+        color: rgba(248, 234, 220, 0.92);
+        font-size: 17px;
+        line-height: 2;
+      }
+
+      .dropcap::first-letter {
+        float: left;
+        margin-right: 12px;
+        padding-top: 8px;
+        color: var(--gold);
+        font-family: "Cormorant Garamond", serif;
+        font-size: 4.5rem;
+        font-style: italic;
+        line-height: 0.7;
+      }
+
+      .signature {
+        color: var(--gold) !important;
+        font-family: "Caveat", cursive !important;
+        font-size: 30px !important;
+      }
+
+      /* FOTO */
+
+      .gallery {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 60px;
+        margin-top: 68px;
+      }
+
+      .photo-row {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 42px;
+      }
+
+      .polaroid {
+        position: relative;
+        width: 235px;
+        padding: 12px 12px 53px;
+        background: var(--paper);
+        box-shadow: 0 25px 55px rgba(0, 0, 0, 0.5);
+        cursor: pointer;
+        transition: 0.4s ease;
+      }
+
+      .polaroid:hover {
+        z-index: 4;
+        transform: rotate(0) scale(1.06) !important;
+      }
+
+      .polaroid img {
+        display: block;
+        width: 100%;
+        aspect-ratio: 4 / 5;
+        object-fit: cover;
+        background: #542136;
+      }
+
+      .polaroid figcaption {
+        position: absolute;
+        right: 5px;
+        bottom: 12px;
+        left: 5px;
+        color: var(--paper-text);
+        font-family: "Caveat", cursive;
+        font-size: 22px;
+        text-align: center;
+      }
+
+      .tape {
+        position: absolute;
+        top: -13px;
+        left: 50%;
+        z-index: 2;
+        width: 92px;
+        height: 26px;
+        background: rgba(246, 193, 119, 0.55);
+        transform: translateX(-50%) rotate(-3deg);
+      }
+
+      .featured {
+        width: min(330px, 86vw);
+        padding-bottom: 60px;
+        transform: rotate(1.5deg);
+      }
+
+      .featured figcaption {
+        font-size: 24px;
+      }
+
+      .strip {
+        width: min(560px, 88vw);
+        transform: rotate(-1deg);
+      }
+
+      .strip img {
+        aspect-ratio: 16 / 9;
+      }
+
+      .r1 {
+        transform: rotate(-3deg);
+      }
+      .r3 {
+        transform: rotate(-1.5deg);
+      }
+      .r4 {
+        transform: rotate(2.5deg);
+      }
+
+      /* VIDEO */
+
+      .video-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 330px);
+        justify-content: center;
+        gap: 45px 52px;
+        max-width: 760px;
+        margin: 66px auto 0;
+      }
+
+      .video-card {
+        overflow: hidden;
+        border: 1px solid rgba(246, 193, 119, 0.42);
+        border-radius: 14px;
+        background: linear-gradient(145deg, #531934, #210711);
+        box-shadow: 0 22px 50px rgba(0, 0, 0, 0.42);
+        transition: 0.3s ease;
+      }
+
+      .video-card:hover {
+        transform: translateY(-8px);
+      }
+
+      .video-frame {
+        position: relative;
+        aspect-ratio: 4 / 5;
+        background: #15030b;
+      }
+
+      .video-frame video {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .badge {
+        position: absolute;
+        top: 14px;
+        left: 14px;
+        z-index: 2;
+        padding: 7px 11px;
+        border: 1px solid var(--gold);
+        border-radius: 999px;
+        background: rgba(33, 7, 17, 0.82);
+        color: var(--gold);
+        font-size: 10px;
+        letter-spacing: 0.12em;
+      }
+
+      .video-info {
+        min-height: 160px;
+        padding: 20px;
+      }
+
+      .video-info span {
+        color: var(--gold);
+        font-family: "Cormorant Garamond", serif;
+        font-size: 23px;
+        font-style: italic;
+      }
+
+      .video-info h3 {
+        margin-top: 6px;
+        font-family: "Cormorant Garamond", serif;
+        font-size: 27px;
+        font-style: italic;
+        font-weight: 400;
+      }
+
+      .video-info p {
+        margin-top: 10px;
+        color: var(--muted);
+        font-size: 14px;
+        line-height: 1.8;
+      }
+
+      /* PESAN RANDOM */
+
+      .surprise {
+        padding-top: 35px;
+      }
+
+      .surprise-card {
+        position: relative;
+        max-width: 720px;
+        margin: auto;
+        padding: 58px 32px 42px;
+        overflow: hidden;
+        border: 1px solid rgba(246, 193, 119, 0.42);
+        border-radius: 22px;
+        background: radial-gradient(
+            circle at 50% 0%,
+            rgba(246, 193, 119, 0.17),
+            transparent 42%
+          ),
+          linear-gradient(145deg, rgba(83, 19, 45, 0.88), rgba(29, 5, 16, 0.94));
+        box-shadow: 0 25px 65px rgba(0, 0, 0, 0.35);
+        text-align: center;
+      }
+
+      .surprise-card::before {
+        position: absolute;
+        top: 18px;
+        left: 28px;
+        font-size: 36px;
+        content: "🌸";
+      }
+
+      .surprise-card::after {
+        position: absolute;
+        right: 28px;
+        bottom: 18px;
+        font-size: 36px;
+        content: "🌷";
+      }
+
+      .surprise-description {
+        max-width: 470px;
+        margin: 17px auto 0;
+        color: var(--muted);
+        line-height: 1.85;
+      }
+
+      .message-box {
+        display: none;
+        max-width: 510px;
+        margin: 28px auto 0;
+        padding: 25px 24px 22px;
+        border: 1px dashed rgba(246, 193, 119, 0.7);
+        border-radius: 14px;
+        background: rgba(255, 248, 237, 0.96);
+        box-shadow: 0 10px 24px rgba(0, 0, 0, 0.17);
+        color: #4c2034;
+        transform: rotate(-1deg);
+      }
+
+      .message-box.show {
+        display: block;
+        animation: message-show 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+      }
+
+      @keyframes message-show {
+        from {
+          opacity: 0;
+          transform: translateY(22px) scale(0.92) rotate(-3deg);
+        }
+
+        to {
+          opacity: 1;
+          transform: translateY(0) scale(1) rotate(-1deg);
+        }
+      }
+
+      .message-top {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        padding-bottom: 13px;
+        border-bottom: 1px dashed rgba(94, 39, 61, 0.25);
+        color: #aa4969;
+        font-family: "Caveat", cursive;
+        font-size: 20px;
+      }
+
+      #surprise-text {
+        margin-top: 18px;
+        color: #4c2034;
+        font-family: "Cormorant Garamond", serif;
+        font-size: clamp(1.4rem, 4vw, 1.75rem);
+        font-style: italic;
+        font-weight: 500;
+        line-height: 1.45;
+      }
+
+      .message-sign {
+        margin-top: 16px;
+        color: #ad526f;
+        font-family: "Caveat", cursive;
+        font-size: 21px;
+      }
+
+      /* ALASAN */
+
+      .reasons {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+        max-width: 1000px;
+        margin: 60px auto 0;
+      }
+
+      .reason {
+        padding: 23px;
+        border: 1px solid rgba(246, 193, 119, 0.24);
+        border-radius: 14px;
+        background: rgba(52, 8, 27, 0.62);
+        transition: 0.3s ease;
+      }
+
+      .reason:hover {
+        border-color: rgba(246, 193, 119, 0.65);
+        transform: translateY(-6px);
+      }
+
+      .num {
+        color: var(--gold);
+        font-family: "Cormorant Garamond", serif;
+        font-size: 26px;
+        font-style: italic;
+      }
+
+      .reason p {
+        margin-top: 11px;
+        line-height: 1.85;
+      }
+
+      /* KUE */
+
+      .cake-section {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        min-height: 85vh;
+        text-align: center;
+      }
+
+      .cake {
+        position: relative;
+        width: 300px;
+        height: 230px;
+        margin-top: 75px;
+        cursor: pointer;
+      }
+
+      .plate {
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        width: 330px;
+        height: 25px;
+        border-radius: 100%;
+        background: #651a37;
+        box-shadow: 0 15px 35px #000;
+        transform: translateX(-50%);
+      }
+
+      .bottom {
+        position: absolute;
+        bottom: 17px;
+        left: 50%;
+        width: 265px;
+        height: 90px;
+        border-radius: 15px;
+        background: linear-gradient(#a84d70, #6e183b);
+        transform: translateX(-50%);
+      }
+
+      .bottom::before {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 25px;
+        border-radius: 15px 15px 0 0;
+        background: #fff1df;
+        content: "";
+      }
+
+      .top {
+        position: absolute;
+        bottom: 100px;
+        left: 50%;
+        width: 190px;
+        height: 75px;
+        border-radius: 14px;
+        background: linear-gradient(#873452, #551026);
+        transform: translateX(-50%);
+      }
+
+      .top::before {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 22px;
+        border-radius: 14px 14px 0 0;
+        background: #f3b7c6;
+        content: "";
+      }
+
+      .number {
+        position: absolute;
+        bottom: 15px;
+        left: 50%;
+        color: var(--gold);
+        font-family: "Cormorant Garamond", serif;
+        font-size: 37px;
+        font-weight: bold;
+        text-shadow: 0 0 15px var(--gold);
+        transform: translateX(-50%);
+      }
+
+      .candles {
+        position: absolute;
+        top: 10px;
+        left: 50%;
+        z-index: 3;
+        display: flex;
+        gap: 50px;
+        transform: translateX(-50%);
+      }
+
+      .candle {
+        position: relative;
+        width: 9px;
+        height: 55px;
+        border-radius: 5px;
+        background: repeating-linear-gradient(
+          45deg,
+          #f3a8bd 0 6px,
+          #fff1df 6px 12px
+        );
+      }
+
+      .flame {
+        position: absolute;
+        top: -26px;
+        left: 50%;
+        width: 16px;
+        height: 25px;
+        border-radius: 50%;
+        background: radial-gradient(
+          circle at 50% 75%,
+          #fff8d5,
+          #ffd166 40%,
+          #ff8c42 75%,
+          transparent
+        );
+        box-shadow: 0 0 18px #ffb347;
+        transform: translateX(-50%);
+        animation: fire 0.3s infinite alternate;
+      }
+
+      @keyframes fire {
+        to {
+          transform: translateX(-50%) scale(1.15) rotate(4deg);
+        }
+      }
+
+      .flame.out {
+        opacity: 0;
+        transform: translateX(-50%) scale(0);
+        animation: none;
+        transition: 0.4s ease;
+      }
+
+      .tap {
+        margin-top: 35px;
+        color: var(--gold);
+        font-family: "Caveat", cursive;
+        font-size: 22px;
+      }
+
+      #finale {
+        display: none;
+        margin-top: 35px;
+      }
+
+      #finale.show {
+        display: block;
+        animation: pop 0.7s ease;
+      }
+
+      @keyframes pop {
+        from {
+          opacity: 0;
+          transform: scale(0.8);
+        }
+
+        to {
+          opacity: 1;
+          transform: scale(1);
+        }
+      }
+
+      #finale h3 {
+        color: var(--gold);
+        font-family: "Cormorant Garamond", serif;
+        font-size: clamp(2rem, 5vw, 3.2rem);
+        font-style: italic;
+      }
+
+      #finale p {
+        max-width: 440px;
+        margin: 14px auto;
+        color: var(--muted);
+        line-height: 1.8;
+      }
+
+      /* MUSIC */
+
+      #music {
+        position: fixed;
+        right: 18px;
+        bottom: 18px;
+        z-index: 80;
+        display: none;
+        align-items: center;
+        gap: 11px;
+        padding: 11px 14px;
+        border: 1px solid rgba(246, 193, 119, 0.65);
+        border-radius: 999px;
+        background: rgba(57, 12, 32, 0.92);
+        backdrop-filter: blur(10px);
+      }
+
+      body.started #music {
+        display: flex;
+      }
+
+      .eq {
+        display: flex;
+        align-items: flex-end;
+        gap: 3px;
+        width: 20px;
+        height: 16px;
+      }
+
+      .eq span {
+        width: 3px;
+        height: 100%;
+        border-radius: 2px;
+        background: var(--gold);
+        transform: scaleY(0.25);
+        transform-origin: bottom;
+      }
+
+      .eq.playing span {
+        animation: eq 0.9s infinite;
+      }
+
+      .eq.playing span:nth-child(2) {
+        animation-delay: 0.15s;
+      }
+      .eq.playing span:nth-child(3) {
+        animation-delay: 0.3s;
+      }
+      .eq.playing span:nth-child(4) {
+        animation-delay: 0.45s;
+      }
+
+      @keyframes eq {
+        50% {
+          transform: scaleY(1);
+        }
+      }
+
+      .music-title {
+        font-size: 12px;
+        font-weight: 600;
+      }
+
+      .music-status {
+        color: var(--muted);
+        font-size: 10px;
+      }
+
+      #toggle {
+        width: 36px;
+        height: 36px;
+        border: 0;
+        border-radius: 50%;
+        background: var(--gold);
+        color: #2a0714;
+        font-weight: bold;
+      }
+
+      /* LIGHTBOX */
+
+      #lightbox {
+        position: fixed;
+        inset: 0;
+        z-index: 90;
+        display: none;
+        place-items: center;
+        padding: 24px;
+        background: rgba(18, 3, 11, 0.91);
+        backdrop-filter: blur(8px);
+      }
+
+      #lightbox.show {
+        display: grid;
+      }
+
+      .light-card {
+        position: relative;
+        width: min(420px, 92vw);
+        padding: 18px 18px 25px;
+        border: 1px solid rgba(246, 193, 119, 0.4);
+        background: #3a0c20;
+        box-shadow: 0 28px 70px #000;
+      }
+
+      .light-card img {
+        width: 100%;
+        max-height: 65vh;
+        object-fit: cover;
+      }
+
+      .cap {
+        margin-top: 15px;
+        color: var(--gold);
+        font-family: "Caveat", cursive;
+        font-size: 25px;
+        text-align: center;
+      }
+
+      .story {
+        margin-top: 9px;
+        color: var(--muted);
+        font-size: 14px;
+        line-height: 1.8;
+        text-align: center;
+      }
+
+      #close {
+        position: absolute;
+        top: -14px;
+        right: -14px;
+        width: 36px;
+        height: 36px;
+        border: 0;
+        border-radius: 50%;
+        background: var(--gold);
+        color: #2a0714;
+      }
+
+      /* FOOTER */
+
+      footer {
+        padding: 60px 20px;
+        border-top: 1px solid rgba(232, 180, 184, 0.22);
+        text-align: center;
+      }
+
+      footer .script {
+        color: var(--gold);
+        font-size: 31px;
+      }
+
+      footer .tiny {
+        margin-top: 13px;
+        color: var(--muted);
+        font-size: 11px;
+        letter-spacing: 0.12em;
+      }
+
+      @media (max-width: 900px) {
+        .reasons {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+
+      @media (max-width: 740px) {
+        .video-grid {
+          grid-template-columns: 1fr;
+          justify-items: center;
+        }
+
+        .video-card {
+          width: min(330px, 86vw);
+        }
+      }
+
+      @media (max-width: 560px) {
+        section {
+          padding: 82px 20px;
+        }
+
+        .reasons {
+          grid-template-columns: 1fr;
+        }
+
+        .photo-row {
+          gap: 30px;
+        }
+
+        .polaroid {
+          width: min(235px, 82vw);
+        }
+
+        .featured {
+          width: min(300px, 86vw);
+        }
+
+        #music {
+          right: 10px;
+          bottom: 10px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="grain"></div>
+    <div id="flowers"></div>
+
+    <!-- PIN -->
+    <div id="pin-screen">
+      <div class="pin-card">
+        <div class="pin-icon">♡</div>
+
+        <p class="overline">ada kejutan kecil buat kamu</p>
+
+        <h1 class="display">
+          Sebelum masuk,<br />
+          jawab dulu <em>kode rahasia kita.</em>
+        </h1>
+
+        <p class="pin-text">
+          Kalau kamu inget tanggal ini, berarti kamu memang orang yang berhak
+          buka halaman kecil ini.
+        </p>
+
+        <div class="pin-label">masukin enam angka spesialnya</div>
+
+        <input
+          id="pin-input"
+          class="pin-input"
+          type="password"
+          inputmode="numeric"
+          maxlength="6"
+          placeholder="• • • • • •"
+        />
+
+        <p id="pin-error" class="pin-error"></p>
+
+        <button id="pin-button" class="btn" type="button">
+          Buka Kejutannya ✦
+        </button>
+
+        <p class="pin-foot">dibuat khusus buat kamu ♡</p>
+      </div>
+    </div>
+
+    <!-- INTRO -->
+    <div id="intro">
+      <div>
+        <svg class="intro-heart" viewBox="0 0 24 24">
+          <path
+            d="M12 21s-7.5-4.9-10-9.2C.5 8 2.4 4.5 6 4.5c2.1 0 3.6 1.1 4.4 2.7h3.2C14.4 5.6 15.9 4.5 18 4.5c3.6 0 5.5 3.5 4 7.3C19.5 16.1 12 21 12 21z"
+          />
+        </svg>
+
+        <p class="overline">khusus buat birthday girl favorit aku</p>
+
+        <h1 class="display">
+          Ada pesan kecil<br />
+          buat kamu...
+        </h1>
+
+        <p class="intro-sub">
+          Nyalain volume-nya, terus buka pelan-pelan ya. Jangan buru-buru.
+        </p>
+
+        <button id="open" class="btn" type="button">Buka Pesan Ini ✦</button>
+      </div>
+    </div>
+
+    <!-- HERO -->
+    <header class="hero">
+      <div class="hero-content">
+        <p class="overline">hari ini, dunia lagi ngerayain kamu</p>
+
+        <h1 class="display">
+          <span class="line"><span>Selamat Ulang Tahun</span></span>
+          <span class="line"><span>yang ke-23,</span></span>
+          <span class="line"><span class="gold">Sayangkuu.</span></span>
+        </h1>
+
+        <p class="subtitle">
+          Selamat naik level, ya. Semoga tahun ini lebih banyak bahagianya,
+          lebih banyak rezekinya, dan lebih banyak waktu kita buat ketawa
+          bareng.
+        </p>
+
+        <p class="hero-note">birthday girl favorit aku, no debat. ♡</p>
+      </div>
+
+      <p class="scroll">gulir pelan-pelan ↓</p>
+    </header>
+
+    <!-- TEXT BERJALAN -->
+    <div class="marquee">
+      <div class="marquee-track" id="marquee"></div>
+    </div>
+
+    <!-- SURAT -->
+    <section class="letter reveal">
+      <p class="overline">buat perempuan kesayangan aku</p>
+
+      <h2>Surat Kecil <em>Buat Kamu</em></h2>
+
+      <div class="letter-body">
+        <p class="dropcap">
+          Hai, Sayangkuu. Hari ini kamu resmi 23 tahun. Selamat yaa, sekarang
+          kamu makin dewasa, walaupun kadang tingkahnya masih suka bikin aku
+          gemes sendiri.
+        </p>
+
+        <p>
+          Makasih udah jadi orang yang selalu bikin hari aku lebih seru. Dari
+          cerita receh, becandaan yang kadang nggak lucu, sampai momen
+          diem-dieman yang entah kenapa tetap nyaman.
+        </p>
+
+        <p>
+          Di umur baru kamu ini, aku cuma pengen kamu selalu sehat, dikelilingi
+          hal-hal baik, dan semua yang lagi kamu perjuangin bisa pelan-pelan
+          jadi nyata.
+        </p>
+
+        <p>
+          Kalau capek, istirahat ya. Kalau lagi seneng, cerita ke aku. Kalau
+          lagi bingung, kita pikirin bareng-bareng. Aku tetap di sisi kamu.
+        </p>
+
+        <p class="signature">
+          — dari cowok yang sayang kamu banyak banget walau di cuekin cekalang.kangen di call kamu lagi.......
+        </p>
+      </div>
+    </section>
+
+    <!-- GALERI FOTO 12 FOTO -->
+    <section>
+      <div class="head reveal">
+        <p class="overline">hal-hal kecil yang aku simpan</p>
+
+        <h2>Sepotong <em>Kenangan</em></h2>
+
+        <p class="lead">
+          Tiap bingkai kecil sama kamu itu halaman favorit aku. Klik fotonya ya,
+          ada cerita di baliknya.
+        </p>
+      </div>
+
+      <div class="gallery">
+        <figure class="polaroid featured reveal" data-caption="" data-story="M">
+          <span class="tape"></span>
+          <img src="./foto-1.png" alt=" " loading="lazy" />
+          <figcaption></figcaption>
+        </figure>
+
+        <div class="photo-row">
+          <figure class="polaroid r1 reveal" data-caption="    " data-story=" ">
+            <span class="tape"></span>
+            <img src="./foto-2.png" alt="" " loading="lazy" />
+            <figcaption></figcaption>
+          </figure>
+
+          <figure class="polaroid r3 reveal" data-caption="" data-story="">
+            <span class="tape"></span>
+            <img src="./foto-3.png" alt="" loading="lazy" />
+            <figcaption></figcaption>
+          </figure>
+
+          <figure class="polaroid r4 reveal" data-caption="" data-story="">
+            <span class="tape"></span>
+            <img src="./foto-4.png" alt="" loading="lazy" />
+            <figcaption></figcaption>
+          </figure>
+        </div>
+
+        <figure class="polaroid strip reveal" data-caption="" data-story="">
+          <span class="tape"></span>
+          <img src="./foto-5.png" alt="" loading="lazy" />
+          <figcaption></figcaption>
+        </figure>
+
+        <div class="photo-row">
+          <figure class="polaroid r1 reveal" data-caption=" " data-story="   ">
+            <span class="tape"></span>
+            <img src="./foto-6.png" alt=" " loading="lazy" />
+            <figcaption></figcaption>
+          </figure>
+
+          <figure class="polaroid r4 reveal" data-caption=" ">
+            <span class="tape"></span>
+            <img src="./foto-7.jpeg" alt="" loading="lazy" />
+            <figcaption></figcaption>
+          </figure>
+
+          <figure class="polaroid r3 reveal" data-caption="" data-story="">
+            <span class="tape"></span>
+            <img src="./foto-8.jpeg" alt="" loading="lazy" />
+            <figcaption></figcaption>
+          </figure>
+
+          <figure class="polaroid r1 reveal" data-caption="  " data-story="   ">
+            <span class="tape"></span>
+            <img src="./foto-9.jpeg" alt="  " loading="lazy" />
+            <figcaption></figcaption>
+          </figure>
+
+          <figure
+            class="polaroid r4 reveal"
+            data-caption=""
+            data-story="  "
+          >
+            <span class="tape"></span>
+            <img
+              src="./foto-10.jpeg"
+              alt=""
+              loading="lazy"
+            />
+            <figcaption></figcaption>
+          </figure>
+
+
+    <!-- PESAN RANDOM -->
+    <section class="surprise reveal">
+      <div class="surprise-card">
+        <p class="overline">buat kamu yang kadang lupa kalau kamu hebat</p>
+
+        <h2>Ada Pesan Kecil <em>Buat Kamu</em></h2>
+
+        <p class="surprise-description">
+          Kalau hari kamu lagi berat, lagi capek, atau cuma pengen dapet
+          kata-kata manis dari aku, klik tombol di bawah ini.
+        </p>
+
+        <button id="surprise-btn" class="btn" type="button">
+          Buka Pesannya ✦
+        </button>
+
+        <div class="message-box" id="message-box">
+          <div class="message-top">
+            <span>♡</span>
+            <span>pesan dari aku</span>
+            <span>♡</span>
+          </div>
+
+          <p id="surprise-text">
+            Aku punya banyak hal yang mau aku bilang ke kamu.
+          </p>
+
+          <p class="message-sign">— dari cowok yang selalu dukung kamu.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 21 ALASAN -->
+    <section class="reveal">
+      <div class="head">
+        <p class="overline">sedikit alasan kenapa aku betah</p>
+
+        <h2>23 Alasan <em>Kenapa Kamu</em></h2>
+
+      </div>
+
+      <div class="reasons" id="reasons"></div>
+    </section>
+
+    <!-- KUE -->
+    <section class="cake-section reveal">
+      <p class="overline">jangan lupa bikin harapan ya</p>
+
+      <h2>Bikin Satu <em>Permohonan</em></h2>
+
+      <p class="lead" style="max-width: 440px">
+        Pejemin mata sebentar, pikirin satu hal yang paling kamu pengen, terus
+        klik kuenya buat tiup lilinnya.
+      </p>
+
+      <div class="cake" id="cake">
+        <div class="candles">
+          <div class="candle"><div class="flame"></div></div>
+          <div class="candle"><div class="flame"></div></div>
+          <div class="candle"><div class="flame"></div></div>
+        </div>
+
+        <div class="top">
+          <span class="number">23</span>
+        </div>
+
+        <div class="bottom"></div>
+        <div class="plate"></div>
+      </div>
+
+      <p class="tap" id="tap">✦ klik kuenya buat tiup lilin ✦</p>
+
+      <div id="finale">
+        <h3>Happy birthday, sayang! 🎉</h3>
+
+        <p>
+          Semoga harapan yang baru kamu ucapin pelan-pelan jadi nyata. Aku bakal
+          tetap ada buat dukung kamu dan nemenin kamu.
+        </p>
+
+        <button id="relight" class="btn outline" type="button">
+          Nyalain Lilinnya Lagi
+        </button>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+      <p class="script">buat kamu, yang selalu jadi favorit aku.</p>
+
+      <p class="tiny">♥ dibuat pakai banyak sayang dan bunga-bunga kecil ♥</p>
+
+      <button id="confetti-btn" class="btn outline" type="button">
+        Rayain Lagi ✦
+      </button>
+    </footer>
+
+    <!-- LIGHTBOX FOTO -->
+    <div id="lightbox">
+      <div class="light-card">
+        <button id="close" type="button">✕</button>
+
+        <img id="light-img" src="" alt="Foto kenangan" />
+
+        <p class="cap" id="light-cap"></p>
+        <p class="story" id="light-story"></p>
+      </div>
+    </div>
+
+    <!-- MUSIK -->
+    <audio id="audio" preload="auto" loop>
+      <source src="./shape-of-my-heart.mp3" type="audio/mpeg" />
+    </audio>
+
+    <!-- MUSIC PLAYER -->
+    <div id="music">
+      <div class="eq" id="eq">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+
+      <div>
+        <p class="music-title">Shape of my heart</p>
+        <p class="music-status" id="music-status">Lagu Kita</p>
+      </div>
+
+      <button id="toggle" type="button">▶</button>
+    </div>
+
+    <script>
+      /* PIN */
+
+      var correctPin = "050526";
+
+      var pinInput = document.getElementById("pin-input");
+      var pinButton = document.getElementById("pin-button");
+      var pinError = document.getElementById("pin-error");
+      var pinScreen = document.getElementById("pin-screen");
+
+      pinButton.addEventListener("click", function () {
+        var enteredPin = pinInput.value.replace(/\s/g, "");
+
+        if (enteredPin === correctPin) {
+          pinScreen.classList.add("hide");
+        } else {
+          pinError.textContent = "PIN-nya belum pas. Coba inget lagi, ya.";
+          pinInput.value = "";
+          pinInput.focus();
+        }
+      });
+
+      pinInput.addEventListener("keydown", function (event) {
+        if (event.key === "Enter") {
+          pinButton.click();
+        }
+      });
+
+      /* BUNGA JATUH */
+
+      var flowerBox = document.getElementById("flowers");
+      var flowerList = ["🌸", "🌷", "🌼", "💮", "✨"];
+
+      for (var i = 0; i < 34; i++) {
+        var flower = document.createElement("span");
+
+        flower.className = "flower";
+        flower.textContent =
+          flowerList[Math.floor(Math.random() * flowerList.length)];
+
+        flower.style.left = Math.random() * 100 + "vw";
+        flower.style.fontSize = 12 + Math.random() * 15 + "px";
+        flower.style.animationDuration = 7 + Math.random() * 9 + "s";
+        flower.style.animationDelay = Math.random() * -14 + "s";
+        flower.style.setProperty("--drift", -90 + Math.random() * 180 + "px");
+
+        flowerBox.appendChild(flower);
+      }
+
+      /* BUKA PESAN DAN MUSIK */
+
+      var openButton = document.getElementById("open");
+      var intro = document.getElementById("intro");
+
+      var audio = document.getElementById("audio");
+      var music = document.getElementById("music");
+      var toggle = document.getElementById("toggle");
+      var status = document.getElementById("music-status");
+      var equalizer = document.getElementById("eq");
+
+      var playing = false;
+
+      function setMusicState(isPlaying) {
+        playing = isPlaying;
+
+        equalizer.classList.toggle("playing", isPlaying);
+
+        toggle.textContent = isPlaying ? "❚❚" : "▶";
+
+        status.textContent = isPlaying ? "lagi diputer..." : "lagi diem";
+      }
+
+      function playMusic() {
+        audio.volume = 0.55;
+
+        var playPromise = audio.play();
+
+        if (playPromise !== undefined) {
+          playPromise
+            .then(function () {
+              setMusicState(true);
+            })
+            .catch(function () {
+              status.textContent = "klik ▶ buat muter";
+            });
+        }
+      }
+
+      toggle.addEventListener("click", function () {
+        if (playing) {
+          audio.pause();
+          setMusicState(false);
+        } else {
+          playMusic();
+        }
+      });
+
+      audio.addEventListener("error", function () {
+        status.textContent = "file musik belum ada";
+      });
+
+      openButton.addEventListener("click", function () {
+        intro.classList.add("hide");
+        document.body.classList.add("started");
+
+        playMusic();
+
+        setTimeout(function () {
+          celebration(130);
+        }, 400);
+      });
+
+      /* TEXT BERJALAN */
+
+      var phraseList = [
+        "Happy 23 Birthday",
+        "Perempuan Favorit Aku",
+        "Makin Keren, Makin Disayang",
+        "Semoga Semua Mimpinya Tercapai",
+        "Sayang Kamu Banyak Banget",
+      ];
+
+      var marqueeText = phraseList
+        .map(function (phrase) {
+          return "<span>" + phrase + "</span><i>✦</i>";
+        })
+        .join("");
+
+      document.getElementById("marquee").innerHTML = marqueeText + marqueeText;
+
+      /* 23 ALASAN */
+
+      var reasonList = [
+        "Cara kamu ketawa, bahkan pas lelucon aku garing banget.",
+        "Kamu selalu inget hal-hal kecil tentang aku.",
+        "Pengen Peluk kamu yang rasanya kayak pulang tapi blum tercapai.",
+        "Sabar banget ngadepin aku yang kadang nyebelin.",
+        "Senyum kamu yang bisa benerin hari jelek sekalipun.",
+        "Kamu percaya sama mimpi-mimpi aku.",
+        "Suara kamu pas nelpon sebelum tidur, tapi kapan lagi ya denger tiap malam",
+        "Kamu nggak bosen dengerin cerita aku.",
+        "Cara kamu heboh soal hal kecil yang lucu.",
+        "Kamu tetep gemes bahkan pas ngantuk.",
+        "Makan sederhana jadi spesial kalau sama kamu.",
+        "Kamu selalu jadi tim aku.",
+        "Bete-an kamu aja tetep bikin gemes.",
+        "Kamu ngajarin aku buat lebih sabar.",
+        "Playlist kamu jadi playlist aku juga.",
+        "Kamu inget tanggal penting.",
+        "Cara kamu sayang sama keluarga.",
+        "Kamu bikin hari biasa jadi seru.",
+        "Kamu kuat walau lagi capek.",
+        "Kamu bikin aku mau jadi lebih baik.",
+        "Karena kamu ya kamu. Titik.",
+        "Sejauh apapun nanti jaraknya, kamu tetep alasan aku pulang.",
+        "Karena kamu ya kamu. Titik.",
+      ];
+
+      document.getElementById("reasons").innerHTML = reasonList
+        .map(function (reason, index) {
+          var number = String(index + 1).padStart(2, "0");
+
+          return (
+            '<div class="reason">' +
+            '<span class="num">' +
+            number +
+            "</span>" +
+            "<p>" +
+            reason +
+            "</p>" +
+            "</div>"
+          );
+        })
+        .join("");
+
+      /* PESAN RANDOM */
+
+      var randomMessages = [
+        "Kamu nggak harus selalu kuat. Kalau lagi capek, istirahat ya. Aku tetap bangga sama kamu.",
+        "Makasih udah bertahan sejauh ini. Kamu jauh lebih hebat dari yang kamu kira.",
+        "Kalau hari ini terasa berat, inget ya: kamu punya aku yang selalu percaya sama kamu.",
+        "Kamu keren bukan karena kamu sempurna, tapi karena kamu nggak berhenti berusaha.",
+        "Aku harap kamu bisa lihat diri kamu dari mata aku: baik, hangat, kuat, dan spesial banget.",
+        "Jangan lupa makan, jangan lupa istirahat, dan jangan lupa kalau aku sayang kamu.",
+        "Kalau kamu ragu sama diri sendiri, pinjem percaya diri aku dulu. Soalnya aku percaya banget sama kamu.",
+      ];
+
+      var surpriseButton = document.getElementById("surprise-btn");
+      var surpriseText = document.getElementById("surprise-text");
+      var messageBox = document.getElementById("message-box");
+
+      surpriseButton.addEventListener("click", function () {
+        var randomIndex = Math.floor(Math.random() * randomMessages.length);
+
+        surpriseText.textContent = randomMessages[randomIndex];
+
+        messageBox.classList.remove("show");
+
+        void messageBox.offsetWidth;
+
+        messageBox.classList.add("show");
+
+        celebration(55);
+      });
+
+      /* CONFETTI */
+
+      function celebration(amount) {
+        if (typeof confetti !== "function") return;
+
+        confetti({
+          particleCount: amount || 130,
+          spread: 100,
+          origin: { y: 0.65 },
+          colors: ["#f6c177", "#e8b4b8", "#f2d5cf", "#d4a24e"],
+        });
+      }
+
+      document
+        .getElementById("confetti-btn")
+        .addEventListener("click", function () {
+          celebration(130);
+        });
+
+      /* ANIMASI SAAT SCROLL */
+
+      var observer = new IntersectionObserver(
+        function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("show");
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.1 }
+      );
+
+      document.querySelectorAll(".reveal").forEach(function (element) {
+        observer.observe(element);
+      });
+
+      /* LIGHTBOX FOTO */
+
+      var lightbox = document.getElementById("lightbox");
+      var lightImage = document.getElementById("light-img");
+      var lightCaption = document.getElementById("light-cap");
+      var lightStory = document.getElementById("light-story");
+
+      document.querySelectorAll(".polaroid").forEach(function (polaroid) {
+        polaroid.addEventListener("click", function () {
+          var image = polaroid.querySelector("img");
+
+          lightImage.src = image.getAttribute("src");
+          lightImage.alt = image.getAttribute("alt");
+
+          lightCaption.textContent = polaroid.getAttribute("data-caption");
+          lightStory.textContent = polaroid.getAttribute("data-story");
+
+          lightbox.classList.add("show");
+        });
+      });
+
+      document.getElementById("close").addEventListener("click", function () {
+        lightbox.classList.remove("show");
+      });
+
+      lightbox.addEventListener("click", function (event) {
+        if (event.target === lightbox) {
+          lightbox.classList.remove("show");
+        }
+      });
+
+      /* KUE */
+
+      var cake = document.getElementById("cake");
+      var tap = document.getElementById("tap");
+      var finale = document.getElementById("finale");
+      var candleOn = true;
+
+      cake.addEventListener("click", function () {
+        if (!candleOn) return;
+
+        candleOn = false;
+
+        document.querySelectorAll(".flame").forEach(function (flame) {
+          flame.classList.add("out");
+        });
+
+        tap.style.display = "none";
+        finale.classList.add("show");
+
+        celebration(130);
+      });
+
+      document.getElementById("relight").addEventListener("click", function () {
+        candleOn = true;
+
+        document.querySelectorAll(".flame").forEach(function (flame) {
+          flame.classList.remove("out");
+        });
+
+        tap.style.display = "block";
+        finale.classList.remove("show");
+      });
+    </script>
+  </body>
+</html>
